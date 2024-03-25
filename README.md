@@ -39,6 +39,27 @@ Use Docker CLI commands to manage containers:
 Run a image (-d run in background or detach, -P expose all ports, --name assigns a name):  
 `docker run -d -P --name catgif manifoldailearning/catgif`  
 When running `docker ps` you'll see in catgif the command "python ./app.py", it runs a script  
+View the port where catgif is running: `docker port catgif`
+View the app running (on your browser): `localhost:<portviewed>`  
+Stop container: `docker stop catgif`
 
-
-
+## DOCKERFILE
+It's a text file which contains a list of commands that docker should call 
+whenever it is creating an image. You start by specifying the base image, 
+with the command FROM. 
+```dockerfile
+FROM python:3.8
+# Set a directory for the app
+WORKDIR /usr/src/app
+# Copy all the files to the container
+COPY . .
+# Install dependencies
+RUN pip install -no-cache-dir -r requirements.txt
+# Tell the port number the container should expose
+EXPOSE 5000
+# Run the command
+CMD ["python","./app.py"] 
+```
+Now you can build your own image with the dockerfile. 
+Create image: `docker build -t catgif2 .` . 
+Run on your selected port (8888 is local): `docker run -p 8888:5000 catgif2`
