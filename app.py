@@ -25,8 +25,9 @@ class Predict(Resource):
         args = parser.parse_args()
         #X_new = np.fromiter(args.values(), dtype=float)
         X_new = list(args.values())
+        # Interestingly, it returns a numpy array, so to extract
+        # use .item()
         out = {'Prediction': str(model.predict([X_new])[0])}
-        print(out)
 
         return out, 200
 
