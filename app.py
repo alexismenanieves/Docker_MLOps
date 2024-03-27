@@ -3,6 +3,7 @@ from flask import Flask
 from flask_restful import Api, Resource, reqparse
 import numpy as np
 import joblib
+import logging
 
 # Load model and data vectorizer
 model = joblib.load('model.pkl')
@@ -22,8 +23,10 @@ class Predict(Resource):
         parser.add_argument('pet_w', type=float)
 
         args = parser.parse_args()
-        X_new = np.fromiter(args.values(), dtype=float)
-        out = {'Prediction': model.predict([X_new])[0]}
+        #X_new = np.fromiter(args.values(), dtype=float)
+        X_new = list(args.values())
+        out = {'Prediction': str(model.predict([X_new])[0])}
+        print(out)
 
         return out, 200
 
