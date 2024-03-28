@@ -4,7 +4,7 @@ from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
-import joblib
+import pickle
 
 # Load data
 iris = load_iris()
@@ -33,5 +33,16 @@ y_pred = rf.predict(X_test)
 print("Accuracy:", accuracy_score(y_test, y_pred))
 
 # Save trained model
-joblib.dump(rf, 'model.pkl')
-print("Model saved to model.pkl")
+model_filename = './model_components.pkl'
+extra = {
+    'accuracy':1.0,
+    'author':'Richard Tex Tex'
+}
+model_components = {
+    'model':rf,
+    **extra
+}
+
+with open(model_filename, 'wb') as model_file:
+    pickle.dump(model_components, model_file)
+
