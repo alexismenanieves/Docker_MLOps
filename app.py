@@ -27,6 +27,14 @@ class ModelInputs(BaseModel):
 
 ml_models = {}
 
-@async
+def species_predictor(x: dict) -> dict:
+    with open("model_components.pkl","rb") as model_file:
+        model_components = pickle.load(model_file)
+        model = model_components["model"]
+        prediction = model.predict(x)
+        
 
-@app.get
+@asynccontextmanager
+async def ml_lifespan_manager(app: FastAPI):
+    ml_models['']
+
