@@ -8,6 +8,7 @@ import pickle
 
 # Load data
 iris = load_iris()
+iris['feature_names'] = ['sepal_length','sepal_width','petal_length','petal_width']
 X = iris.data
 y = iris.target
 
