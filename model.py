@@ -37,7 +37,7 @@ print("Accuracy:", accuracy_score(y_test, y_pred))
 model_filename = './model_components.pkl'
 extra = {
     'accuracy':1.0,
-    'author':'Richard Tex Tex'
+    'author':'Manu'
 }
 model_components = {
     'model':rf,
